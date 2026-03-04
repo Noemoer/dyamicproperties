@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
+import { Hero } from "@/components/ui/animated-hero";
 import About from "@/components/About";
 import WhatWeDo from "@/components/WhatWeDo";
 import AIManagement from "@/components/AIManagement";

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useFadeIn } from "@/hooks/use-fade-in";
+import { GlassButton } from "@/components/ui/liquid-glass";
 
 const Tenants = () => {
   const ref = useFadeIn();
@@ -73,12 +74,9 @@ const Tenants = () => {
             <option value="3">3</option>
             <option value="4+">4+</option>
           </select>
-          <button
-            type="submit"
-            className="w-full px-8 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
-          >
+          <GlassButton fullWidth type="submit">
             Submit
-          </button>
+          </GlassButton>
         </form>
       </div>
     </section>
