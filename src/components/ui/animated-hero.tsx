@@ -15,24 +15,57 @@ function Hero() {
   }, [titleNumber, titles]);
 
   return (
-    <section className="w-full pt-28 pb-20 md:pt-36 md:pb-28 bg-background">
+    <section
+      className="relative w-full pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden"
+      style={{
+        backgroundImage: 'radial-gradient(circle, hsl(var(--muted-foreground) / 0.08) 1px, transparent 1px)',
+        backgroundSize: '24px 24px',
+      }}
+    >
       <GlassFilter />
-      <div className="container mx-auto px-4">
-        <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
+
+      {/* Watermark background text */}
+      <div
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+        aria-hidden="true"
+      >
+        <span
+          className="font-heading font-black text-[12vw] md:text-[10vw] tracking-widest uppercase whitespace-nowrap"
+          style={{ color: 'hsl(var(--foreground) / 0.06)' }}
+        >
+          PROPERTIES
+        </span>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex gap-8 py-12 lg:py-24 items-center justify-center flex-col">
           <div>
             <span className="inline-block rounded-full bg-secondary text-secondary-foreground px-4 py-1.5 text-sm font-medium tracking-tight">
               AI-Powered Property Management
             </span>
           </div>
+
+          {/* Navy accent line */}
+          <div className="w-[60px] h-[4px] rounded-full bg-primary" />
+
           <div className="flex gap-4 flex-col">
-            <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-heading font-bold">
+            <h1
+              className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-bold"
+              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800 }}
+            >
               <span className="text-foreground">We are</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1" style={{ height: '80px' }}>
                 &nbsp;
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
-                    className="absolute font-semibold text-primary"
+                    className="absolute font-semibold"
+                    style={{
+                      background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(205 50% 45%))',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
                     initial={{ opacity: 0, y: -150 }}
                     transition={{ type: 'spring', stiffness: 50 }}
                     animate={
