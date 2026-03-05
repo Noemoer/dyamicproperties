@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { MoveRight, PhoneCall } from 'lucide-react';
 import { GlassButton, GlassFilter } from '@/components/ui/liquid-glass';
+import stlSkyline from '@/assets/stl-skyline.jpg';
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -15,27 +16,14 @@ function Hero() {
   }, [titleNumber, titles]);
 
   return (
-    <section
-      className="relative w-full pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden"
-      style={{
-        backgroundImage: 'radial-gradient(circle, hsl(var(--muted-foreground) / 0.08) 1px, transparent 1px)',
-        backgroundSize: '24px 24px',
-      }}
-    >
-      <GlassFilter />
-
-      {/* Watermark background text */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
-        aria-hidden="true"
-      >
-        <span
-          className="font-heading font-black text-[12vw] md:text-[10vw] tracking-widest uppercase whitespace-nowrap"
-          style={{ color: 'hsl(var(--foreground) / 0.06)' }}
-        >
-          PROPERTIES
-        </span>
+    <section className="relative w-full py-8 lg:py-16 overflow-hidden">
+      {/* Background image with white overlay */}
+      <div className="absolute inset-0 z-0">
+        <img src={stlSkyline} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-background/85" />
       </div>
+
+      <GlassFilter />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex gap-8 py-12 lg:py-24 items-center justify-center flex-col">
@@ -49,17 +37,14 @@ function Hero() {
           <div className="w-[60px] h-[4px] rounded-full bg-primary" />
 
           <div className="flex gap-4 flex-col">
-            <h1
-              className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-bold"
-              style={{ fontFamily: "'Playfair Display', serif", fontWeight: 800 }}
-            >
-              <span className="text-foreground">We are</span>
+            <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tight text-center font-black">
+              <span className="text-foreground text-3xl md:text-5xl">We are</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1" style={{ height: '80px' }}>
                 &nbsp;
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
-                    className="absolute font-semibold"
+                    className="absolute font-black"
                     style={{
                       background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(205 50% 45%))',
                       WebkitBackgroundClip: 'text',
@@ -78,7 +63,7 @@ function Hero() {
                   </motion.span>
                 ))}
               </span>
-              Rental Properties in St. Louis, MO
+              <span className="text-foreground text-3xl md:text-5xl">Rental Properties in St. Louis, MO</span>
             </h1>
             <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
               DRF Dyamic Resources LLC combines real estate investment with AI-powered property management. Quality single-family homes, Section 8 welcome, and 24/7 tenant support — always on, always available.
