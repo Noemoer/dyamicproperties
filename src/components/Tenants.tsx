@@ -1,18 +1,45 @@
 import { useState } from "react";
 import { useFadeIn } from "@/hooks/use-fade-in";
 import { GlassButton } from "@/components/ui/liquid-glass";
+import { supabase } from "@/lib/supabase";
+import { useToast } from "@/hooks/use-toast";
 
 const Tenants = () => {
   const ref = useFadeIn();
+  const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", phone: "", voucher: "", bedrooms: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you! Our team will follow up with you shortly.");
+    setLoading(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke("send-inquiry", {
+        body: form,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Inquiry Submitted!",
+        description: "Thank you! Our team will follow up with you shortly.",
+      });
+      setForm({ name: "", email: "", phone: "", voucher: "", bedrooms: "" });
+    } catch (err) {
+      console.error("Form submission error:", err);
+      toast({
+        title: "Submission Failed",
+        description: "Something went wrong. Please try again or email us directly at info@dyamicresources.com.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -75,7 +102,7 @@ const Tenants = () => {
             <option value="4+">4+</option>
           </select>
           <GlassButton fullWidth type="submit">
-            Submit
+            {loading ? "Submitting..." : "Submit"}
           </GlassButton>
         </form>
       </div>
