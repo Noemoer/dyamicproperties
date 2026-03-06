@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Footer = () => (
-  <footer className="bg-primary text-primary-foreground py-12">
+  <footer id="footer" className="bg-primary text-primary-foreground py-12">
     <div className="container mx-auto px-4 text-center space-y-3 text-sm">
       <p className="font-heading font-semibold text-base">DRF Dyamic Resources LLC</p>
       <p className="opacity-80">AI-Powered Property Management — St. Louis, MO</p>

@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Properties", href: "/#properties" },
   { label: "AI Management", href: "/#ai" },
   { label: "Tenants", href: "/#tenants" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/#footer" },
 ];
 
 const Navbar = () => {
